@@ -1,0 +1,12 @@
+{
+  "params": {
+    "sigma_eta": 0.4702815649372257,
+    "sigma_eps": 1.792351135060654e-07,
+    "alpha": 1.3161893648624779e-18
+  },
+  "loglike": -4839.351867311712,
+  "success": true,
+  "n_trials": 14869,
+  "n_pulses": 35327,
+  "bootstraps": []
+}
