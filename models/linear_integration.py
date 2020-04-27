@@ -8,6 +8,7 @@ class LinearIntegration(Model):
 
     param_names = ["sigma"]
     param_text = {"sigma": "σ_η"}
+    color = "#265EA6"
 
     def simulate_dataset(self, n, data=None, seed=None):
 
@@ -40,7 +41,10 @@ class LinearIntegration(Model):
     def predict_response(self, trial_data, pulse_data):
 
         sigma = self.params.sigma
-        dv_mean = pulse_data.groupby(self.trial_grouper).pulse_llr.sum()
+        dv_mean = (pulse_data
+                   .groupby(self.trial_grouper, sort=False)
+                   .pulse_llr
+                   .sum())
         dv_std = np.sqrt(sigma ** 2 * trial_data["pulse_count"])
         return stats.norm(dv_mean, dv_std).sf(0)
 

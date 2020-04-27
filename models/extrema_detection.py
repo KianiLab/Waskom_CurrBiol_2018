@@ -9,6 +9,7 @@ class ExtremaDetection(Model):
 
     param_names = ["sigma", "theta"]
     param_text = {"sigma": "σ_η", "theta": "θ_x"}
+    color = "#DE8730"
 
     def simulate_dataset(self, n, data=None, seed=None):
 
@@ -66,6 +67,8 @@ class ExtremaDetection(Model):
 
         norm = stats.norm(llr, sigma)
 
+        grp_kws = dict(level=self.trial_grouper, sort=False)
+
         # Prob of exceeding the 'high' threshold
         p_h = pd.Series(norm.sf(+theta), ix)
 
@@ -73,16 +76,16 @@ class ExtremaDetection(Model):
         p_m = pd.Series(norm.sf(-theta), ix) - p_h
 
         # Prob of not having committed at end of trial
-        p_u = p_m.groupby(level=self.trial_grouper).cumprod()
+        p_u = p_m.groupby(**grp_kws).cumprod()
 
         # Prob of not having committed at start of trial
-        p_w = p_u.groupby(level=self.trial_grouper).shift(1).fillna(1)
+        p_w = p_u.groupby(**grp_kws).shift(1).fillna(1)
 
         # Probability of never exceeding a threshold
-        p_g = p_u.groupby(level=self.trial_grouper).min()
+        p_g = p_u.groupby(**grp_kws).min()
 
         # Probability of responding 'high'
-        p = (p_h * p_w).groupby(level=self.trial_grouper).sum() + p_g * .5
+        p = (p_h * p_w).groupby(**grp_kws).sum() + p_g * .5
 
         return p
 

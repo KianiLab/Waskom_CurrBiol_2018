@@ -9,6 +9,7 @@ class LeakyIntegration(Model):
 
     param_names = ["sigma_eta", "sigma_eps", "alpha"]
     param_text = {"sigma_eta": "σ_η", "sigma_eps": "σ_ϵ", "alpha": "α"}
+    color = "#11875d"
 
     def simulate_dataset(self, n, data=None, seed=None, dt=.1):
 
@@ -79,8 +80,8 @@ class LeakyIntegration(Model):
             t = gap[i].values
             m, v = ornstein_uhlenbeck_moments(t, m, v, alpha, var_d)
 
-        trial_p = stats.norm(m, np.sqrt(v)).sf(0)
-        return trial_p
+        trial_p = pd.Series(stats.norm(m, np.sqrt(v)).sf(0), llr.index)
+        return trial_p.reindex(trial_data.index)
 
     def predict_evidence_func(self, xbar):
 

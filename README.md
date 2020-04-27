@@ -2,7 +2,7 @@
 
 This repository contains data and analysis code for the following paper:
 
-Waskom ML, Kiani R (2018). [Decision making through integration of sensory evidence at prolonged timescales](https://www.cell.com/current-biology/fulltext/S0960-9822(18)31350-2). *Current Biology*.
+Waskom ML, Kiani R (2018). [Decision making through integration of sensory evidence at prolonged timescales](https://www.cell.com/current-biology/fulltext/S0960-9822(18)31350-2). *Current Biology 28*(23): 2350–3856.
 
 ## Data
 
@@ -21,11 +21,13 @@ A few differences in nomenclature between the code and paper should be noted. Fi
 
 ## Behavioral analyses
 
-The [statistics notebook](./statistics.ipynb) contains a summary of the model fit and comparisons along with the behavioral analyses reported in the paper.
+The [demo notebook](./demo.ipynb) demonstrates how the main behavioral assays were computed and shows how visualize the model fits with respect to each assay.
+
+The [statistics notebook](./statistics.ipynb) contains a quantitative summary of the model fit and comparisons along with the behavioral analyses reported in the paper.
 
 ## Dependencies
 
-A list of software dependencies and versions corresponding to the paper can be found in [`requirements.txt`](./requirements.txt).
+The code is written for Python 3.6. A list of library versions corresponding to the paper can be found in [`requirements.txt`](./requirements.txt).
 
 ## License
 

@@ -188,7 +188,7 @@ class Model(object):
             G = g(mesh)
 
             # Define indicator function to select sequences by mean evidence
-            def I(w):
+            def I(w):  # noqa
                 return np.abs(X / n - w) < (dx / 2)
 
             for d in [dh, dl]:

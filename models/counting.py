@@ -8,6 +8,7 @@ class Counting(Model):
 
     param_names = ["sigma"]
     param_text = {"sigma": "σ_η"}
+    color = "#635790"
 
     def simulate_dataset(self, n, data=None, seed=None):
 
@@ -60,7 +61,9 @@ class Counting(Model):
         p_inc = stats.norm.sf(0, fit_data.pulse_llr, sigma)
         fit_data["p_inc"] = p_inc
 
-        trial_p = fit_data.groupby(self.trial_grouper).apply(trial_func)
+        trial_p = (fit_data
+                   .groupby(self.trial_grouper, sort=False)
+                   .apply(trial_func))
         return trial_p
 
     def predict_evidence_func(self, xbar, lim=3, dx=.25):
