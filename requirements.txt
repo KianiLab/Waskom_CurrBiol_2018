@@ -1,5 +1,5 @@
 numpy==1.14
-scipy==1.1
+scipy==1.10.0
 matplotlib==2.2
 pandas==0.21
 seaborn==0.9
